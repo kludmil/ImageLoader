@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -85,6 +86,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void setAdapter() {
         adapter = new ListAdapter(this, listData);
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+                if (i != 0) adapter.isScrolling(true);
+                else {
+                    adapter.isScrolling(false);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+
+            }
+        } );
         listView.setAdapter(adapter);
         (findViewById(R.id.progressBar)).setVisibility(View.GONE);
     }

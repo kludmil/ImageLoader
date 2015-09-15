@@ -24,12 +24,17 @@ public class ListAdapter extends ArrayAdapter<ListData> {
     private static final int ITEM_VIEW_RES_ID = R.layout.list_item;
     private final LayoutInflater mLayoutInflater;
     public AvatarLoader mLoader;
+    private boolean isScrolling;
 
     public ListAdapter(@NotNull Context context, @NotNull ListData[] values){
 		super(context, ITEM_VIEW_RES_ID, values);
         this.mLayoutInflater = LayoutInflater.from(context);
         mLoader = new AvatarLoader(context);
 	}
+
+    public void isScrolling(boolean isScrolling){
+        this.isScrolling = isScrolling;
+    }
 
     @Override
 	public long getItemId(int position) {
